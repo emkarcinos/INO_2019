@@ -1,0 +1,184 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage[hidelinks]{hyperref}
+\usepackage{forest}
+
+\definecolor{folderbg}{RGB}{124,166,198}
+\definecolor{folderborder}{RGB}{110,144,169}
+
+\def\Size{4pt}
+\tikzset{
+  folder/.pic={
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.05*\Size,0.2\Size+5pt) rectangle ++(.75*\Size,-0.2\Size-5pt);  
+    \filldraw[draw=folderborder,top color=folderbg!50,bottom color=folderbg]
+      (-1.15*\Size,-\Size) rectangle (1.15*\Size,\Size);
+  }
+}
+
+\title{Obieg dokumentów w projekcie}
+\author{Marcin Kostrzewski}
+\date{19 Października, 2019r}
+
+\begin{document}
+    
+\maketitle
+
+\newpage
+\tableofcontents
+
+\newpage
+\section{Wprowadzenie}
+Celem tego dokumentu jest usystematyzowanie pracy z dokumentacją
+w projekcie, omówienie struktury plików, zasad nazewnictwa,
+zarządzaniem wersjami czy określenie zasad dostępu.
+
+\section{Przechowywanie dokumentów}
+Wszystkie dokumenty dotyczące projektu będą przechowywane na \textbf{Dysku Google}
+(\url{drive.google.com}).
+Aby umożliwić korzystanie z serwisu, zostało utworzone konto \textbf{Google}
+na rzecz firmy. Dostęp do samego konta uzyskuje jedynie administrator, lecz każdy
+pracownik ma dostęp do głównego folderu, w którym będą umieszczane wszystkie dokumenty.
+Zostaną rozesłane wiadomości e-mail do każdego pracownika z prywatnym linkiem do 
+całego folderu.
+
+\section{Struktura katalogów}
+Aby efektownie zbierać wszystkie dokumenty, usystematyzowana została struktura folderów,
+która zapewni porządek w każdym projekcie. Wygląda ona następująco:
+\newline
+
+\begin{forest}
+    for tree={
+      font=\ttfamily,
+      grow'=0,
+      child anchor=west,
+      parent anchor=south,
+      anchor=west,
+      calign=first,
+      inner xsep=7pt,
+      edge path={
+        \noexpand\path [draw, \forestoption{edge}]
+        (!u.south west) +(7.5pt,0) |- (.child anchor) pic {folder} \forestoption{edge label};
+      },
+      before typesetting nodes={
+        if n=1
+          {insert before={[,phantom]}}
+          {}
+      },
+      fit=band,
+      before computing xy={l=15pt},
+    } 
+  [Home
+    [Project
+        [Public
+            [src]
+            [export]
+            [old]
+            [queue]
+            [draft]
+        ]
+        [Private
+            [src]
+            [export]
+            [old]
+            [queue]
+            [draft]
+        ]
+    ]
+  ]
+\end{forest}
+\newpage
+\textbf{Legenda:}
+\begin{itemize}
+    \item Project: Nazwa projektu
+    \item Public: Dokumenty, które mają zostać upublicznione
+    \item Private: Dokumenty przeznaczone tylko dla pracowników
+    \item src: Pliki źródłowe (edytowalne)
+    \item export: Katalog z finalnymi, nieedytowalnymi dokumentami
+    \item old: Poprzednie wersje dokumentów (tylko w formacie edytowalnym)
+    \item queue: Dokumenty do akceptacji (nieedytowalne)
+    \item draft: Katalog roboczy z plikami źródłowymi
+\end{itemize}
+\textbf{Uwaga!}
+\newline
+Jeżeli dany dokument zawiera dodatkowe materiały, takie jak obrazy, wykresy, czy inne
+pliki, w katalogach \textit{src} i \textit{draft} powinien zostać utworzony \textbf{osobny folder} dla danego
+dokumentu zawierający edytowalne pliki dokumentu oraz załączników.
+
+\section{Uprawnienia}
+\textbf{Google Drive} udostępnia dwa poziomy uprawnień: zapis i odczyt.
+\subsection{Odczyt}
+Domyślnie, każdy pracownik ma możliwość odczytu wszystkich dokumentów we wszystkich folderach, tj
+do wszystkich projektów, do dokumentów publicznych i prywatnych i do wszystkich podkatalogów.
+\subsection{Zapis}
+Dostęp do absolutnego zapisu we wszystkich katalogach i podkatalogach dla danego projektu
+przyznawany jest jedynie kierownikowi ds. dokumentacji oraz kierownikowi projektu.
+Programiści i edytorzy mają możliwość zapisywania plików jedynie w folderze \textit{Private} dla danego
+projektu, w którym pracują. Edytorzy dodatkowo mają dostęp do dokumentów publicznych. Mimo tego grupy te \textbf{nie powinne} umieszczać
+czy edytować plików w folderach innych niż \textit{queue} i \textit{draft} bez upoważnienia przez
+kierownika ds. dokumentacji lub kierownika projektu.
+
+\section{Nazewnictwo plików}
+W nazwach plików należy stosować się do szeregu ściśle określonych zasad:
+\begin{itemize}
+    \item Nie mogą występować żadne znaki białe
+    \item Polskie znaki są zalecane
+    \item Nie wolno używać symboli: \textbackslash / : * ? " \textless \textgreater
+    \item Nazwa pliku powinna rozpoczynać się z wielkiej litery, i każde kolejne słowo powinno być rozpoczęte z wielkiej litery
+    \item Musi zawierać numer wersji w formacie vV.R (numer wersji i rewizii)
+\end{itemize}
+Ogólnie:
+\begin{center}
+    NazwaPrzykładowegoPlikuv2.3.pdf
+\end{center}
+
+\section{Styl i formatowanie dokumentu}
+Każdy dokument powinien posiadać:
+\begin{itemize}
+    \item Stronę tytułową zawierającą nazwę dokumentu, imię i nazwisko twórcy oraz datę pierwszego utworzenia
+    \item Tabelę zmian w odniesieniu do wersji poprzedniej
+    \item Spis treści
+    \item Numer strony
+\end{itemize}
+Dodatkowo, wprowadzone zostały zasady dotyczące estetyki i formatowania:
+\begin{itemize}
+    \item Tekst ma być odpowiednio podzielony na paragrafy
+    \item Justowanie tekstu jest obowiązkowe
+    \item Dowolna czcionka typu \textbf{serif}
+    \item Odniesienia do nazw funkcji kodu źródłowego, jego fragmenty i inne elementy powinny wyraźnie wyróżniać się od reszty tekstu, możliwie czcionką typu \textbf{monospaced}
+    \item Stylizacja i formatowanie zgodne ze standardami \textbf{LaTeX} są zalecene
+\end{itemize}
+
+\section{Obieg}
+\begin{center}
+    \textit{Formuła opisana niżej jest jedynie uogólnieniem i może się różnić w zależności od projektu.}
+\end{center}
+
+Dokument jest stale rozwijany przez twórce w folderze roboczym \textit{draft} w danym projekcie. Po ukończeniu
+danej wersji, dokument jest eksportowany do finalnego formatu i umieszczany w katalogu \textit{queue} przez twórcę dokumentu.
+\par
+Kierownik ds. dokumentacji w wyznaczonych do tego godzinach sprawdza foldery \textit{draft}
+i przegląda dokumenty. Po dokładnej ocenie wysyła wiadomość zwrotną do twórcy
+dokumentu. Jeżeli dokument spełnia wszystkie kryteria, zostaje zatwierdzony. Kierownik
+upoważnia twórcę dokumentu do umieszczenia dokumentu w folderach \textit{src} i \textit{export}.
+Jeżeli istnieją, usuwa poprzednie wersje z folderu \textit{src} i z folderu \textit{export} przenosi
+dokument do folderu \textit{old}. W przypadku niezgodności dokumentu, odsyłana
+jest wiadomość zwrotna z ewentualnymi poprawkami.
+\par
+Kierownik projektu po konsultacjach z klientem, podejmuje decyzje o upublicznieniu
+danych dokumentów. Jeżeli dokumenty wymagają edycji, kierownik ds. dokumentacji
+wyznacza edytora do danego dokumentu i przenosi go do folderu \textit{draft} znajdującego
+się w folderze z dokumentami publicznymi dla danego projektu, oraz usuwa dokument z folderu \textit{queue}
+\par
+Edytor przydzielony do danego dokumentu pracuje nad nim w folderze \textit{draft}.
+Po ukończeniu prac, eksportuje dokument do foleru \textit{queue} i oczekuje na
+wiadomość zwrotną. Proces dalej wygląda tak samo jak w przypadku dokumentów prywanych.
+\par
+Przed ostatecznym upublicznieniem dokumentów klientowi, kierownik projektu
+analizuje dokumenty z folderu \textit{export}. Jeżeli dokument nie wymaga 
+poprawek, wysyłany jest klientowi. Jeżeli takie poprawki jednak istnieją, sprawa
+trafia z powrotem do kierownika ds. dokumentacji.
+
+\end{document}
+
