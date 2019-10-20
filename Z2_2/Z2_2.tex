@@ -1,0 +1,160 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\title{Wizja systemu informatycznego dla firmy produkującej filmy wideo MOP Media}
+\author{Marcin Kostrzewski, Mateusz Tylka}
+\date{15 Września, 2019r}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Wstęp}
+Celem tego dokumentu jest analiza, zebranie, skompilowanie wszystkich
+potrzeb i celów systemu "MOP Management". Przedstawione są w nim wymagania klienta, oraz sposob  w jaki system ma je realizować.
+\section{Pozycjonowanie}
+\subsection{Opis problemu}
+\begin{itemize}
+    \item Problemem jest słaba organizacja formalności firmy
+    \item Skutkiem tego jest wolna, często nieefektywna praca
+    \item Rozwiązanie tego problemu powinno polegać na znacznym usprawnieniu organizacji firmy
+\end{itemize}
+\subsection{Informacja o produkcie}
+\begin{itemize}
+    \item Klient: \textbf{MOP Media}
+    \item Nazwa produktu: \textbf{MOP Management}
+    \item Produkt ma usprawnić działanie firmy
+\end{itemize}
+\section{Opis klienta}
+\subsection{Demografia}
+Pracownicy w firmie klienta to osoby w wieku 20-30 lat.
+Osoby te są biegłymi użytkownikami sprzętu komputerowego, korzystają
+głownie z programów do edycji wideo i Excela, natomiast mają małą
+styczność z programowaniem, oraz z niskopoziomowym działaniem systemów
+informatycznych. W firmie pracuje również administrator zarządzający
+serwerem, biegle porusza się w sprawach sieciowych, działanie systemów
+informatycznych nie jest mu obce.
+\subsection{Środowisko pracy klienta}
+\begin{itemize}
+    \item W firmie pracuje stale zatrudnionych sześciu pracowników, w tym jeden administrator
+    \item Pracownicy pracują na komputerach zainstalowanych w budynku firmy. Nie wykonują pracy poza tym miejscem.
+    \item Administrator pracuje zdalnie i zarządza serwerem firmy
+\end{itemize}
+\subsection{Kluczowe potrzeby użytkowników}
+Użytkownicy do tej pory korzystali z programu \textit{Microsoft Office Excel} i nie
+byli zadowoleni z systemu pracy ograniczonego przez program.
+Poniżej lista podstawowych problemów związanych z obecnym systemem:
+\begin{itemize}
+    \item Duży poziom skomplikowania
+    \item Konieczność znajomości zaawansowanych funkcji programu
+    \item Brak formalizacji pracy
+    \item Czasochłonne wprowadzanie danych i częste problemy z ich integralnością
+\end{itemize}
+Ponad to administator systemu sformułował poniższe proglemy:
+\begin{itemize}
+    \item Brak konkretnego sposobu przechowywania plików; surowe zasoby Excela trzymane są bezpośrednio na dysku w serwerze
+    \item Skomplikowane wersjonowanie zajmujące dużą przestrzeń dyskową.
+\end{itemize} 
+Użytkownicy wzraz z administratorem chcieliby, aby wszystkie te problemy były rozwiązane.
+\subsection{Alternatywy dla produktu}
+Klient rozważał następujące alternatywy:
+\begin{itemize}
+    \item \textbf{GitHub projects}
+    \item \textbf{Google Issue Tracker}
+\end{itemize}
+Powyższe propozycje zostały odrzucone, ponieważ oczekiwania przewidują
+program specjalizujący się wyłącznie w dziedzinie produkcji wideo wraz z 
+dodatkowymi funkcjami, które żadna z alternatyw nie oferuje.
+\newpage
+\section{Opis produktu}
+\subsection{Perspektywa}
+System ten będzie całkowicie niezależny i będzie tworzył jedną, integralną całość.
+Nie będą z niego korzystały żadne zewnętrzne narzędzia ani systemy.
+System ma zakładać możliwość dalszego rozwoju i implementacji nowych funkcji.
+\subsection{Podsumowanie możliwości}
+\begin{itemize}
+    \item Stworzenie bazy danych: rozwiąże obecne problemy z integralnością danych, zapewni jej systematyzację oraz wyeliminuje problem wersji
+    \item Interfejs: przyśpieszy pracę i zapewni łatwy dostęp do konkretnych fukncji systemu
+    \item Generowanie raportów: udostępni łatwą wizualizację o procesie projektów klienta
+    \item System zadaniowy: łatwiejsze rozdzielanie obowiązków między pracownikami
+\end{itemize}
+\subsection{Założenia}
+Tworząc ten dokument założyliśmy, że na serwerze klienta na którym będzie zainstalowane nasze oprogramowanie
+działa system operacyjny \textbf{Linux} z wersją jądra \textit{4.0 lub wyższej}. Sieć lokalna w firmie klienta działa poprawnie.
+Każdy z komputerów w firmie klienta ma dostęp do sieci. Administrator uzyskuje dostęp do serwera przez protokół \textit{SSH}. 
+\subsection{Dodatkowe koszta}
+Przewidywane przez nas działanie systemu nie zakłada dodatkowych kosztów na rzecz sprzętu;
+klient posiada już komputery klienckie, serwer i sieć LAN.
+\subsection{Licencja i instalacja}
+Produkt będzie bazował na zamkniętej licencjii, tzn. klienci nie będą mieli dostępu do kodu źródłowego.
+Instalacja zostanie przeprowadzona przez wykonawców projektu, razem z administatorem sieci klienta.
+\newpage
+\section{Funkcje produktu}
+\subsection{Baza danych}
+W celu sformalizowania i usystematyzowania danych całe oprogramowanie będzie oparte
+o kompleksową bazę danych. Baza ta będzie reprezentować następujące dane;
+\begin{itemize}
+    \item Klienci; informacje o klientach potrzebne do kontaktów, itp
+    \item Projekty; spis prowadzonych projektów wraz z niezbędnymi informacjami
+    \item Sprzęt; dane o wykorzystaniu sprzętu w konkretnych projektach oraz jego dostępność
+    \item Rachunki; rozliczenia i finanse firmy
+    \item Pracownicy; informacje o pracy pracowników oraz ich dane
+\end{itemize}
+\subsection{Interfejs}
+Aby zapewnić łatwy dostęp do systemu dostępny będzie interfejs WEB dostępny dla każdego pracownika:
+\begin{itemize}
+    \item Prosty dostęp do bazy danych; warstwa abstrakcjii zapewni członkom szybki dostęp do wyszukanych przez nich informacji
+    \item Wizualizacja danych; czytelna prezentacja wykresów, tabelek
+    \item Interfejs do zarządzania zadaniami i śledzenie, postępów; zespół będzie miał możliwość gospodarowania czasem i śledzenia postępów w projekcie, odpowiednio rozdzielając między sobą zadania
+    \item Generowanie raportów; raporty mogą być użyte w celach analitycznych,czy do dzielenia się postępem nad projektem projektu z klientami
+\end{itemize}
+\section{Ograniczenia}
+\subsection{RODO}
+Informacje o klientach w bazach danych powinny być odpowiednio zabezpieczone, tak aby były zgodne z \textbf{ustawami o ochronie danych osobowych RODO}.
+\subsection{Brak dostępu do systemu z zewnątrz}
+Należy pamiętać o tym, że system będzie postawiony w zamkniętej sieci LAN w biurze klienta i dostęp do niej będzie miał jedynie administrator poprzez \textit{SSH}.
+\section{Jakość produktu}
+\subsection{Interfejs webowy}
+Wygląd interfejsu będzie oparty o płaską kolorystykę, minimalizm i czytelność.
+\subsection{Baza danych}
+Nie można dopuścić do utraty danych, ponieważ może to skutkować odpowiedzialnością karną dla firmy klienta.
+Wyciek danych będzie pogwałceniem regulacji prawnych RODO.
+\subsection{Ogólne działanie systemu}
+Cały system powinien działać szybko i sprawnie.
+\section{Priorytety}
+Najważniejszym elementem w tym systemie jest baza danych. Model danych powinien być starannie przemyślany
+i wielokrotnie przedyskutowany z klientem. Trzeba też położyć duży nacisk na bezpieczeństwo danych.
+Najmniejszym priorytetem są raporty.
+\section{Inne wymagania produktowe}
+\subsection{Standardy}
+\begin{itemize}
+    \item Interfejs webowy oparty o semantyczny HTML5 i CSS
+    \item Komunikacja serwer - klient za pomocą protokołu TCP/IP
+    \item Baza danych i serwer postawiony na systemie Linux
+    \item Bezpieczeństwo bazy danych zgodne z przepisami RODO
+\end{itemize}
+\subsection{Wymagania systemowe (serwer)}
+\begin{itemize}
+    \item Czterordzeniowy procesor Intel lub AMD, 2GHz
+    \item 4GB RAM
+    \item 1TB przestrzeni dyskowej
+\end{itemize}
+\section{Dokumentacja}
+\subsection{Dokumentacja serwerowa}
+Będą w niej zawarte informacje o bazie danych, o zasadzie działania aplikacji serwerowej, zachowaniu 
+w przypadkach awarii i kodach błędów.
+\subsection{Pomoc dla użytkownika}
+W aplikacji webowej będzie dostępna sekcja z pomocą opisująca działanie konkretnych funkcji interfejsu.
+\end{document}
