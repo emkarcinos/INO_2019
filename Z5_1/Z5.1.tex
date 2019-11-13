@@ -1,0 +1,128 @@
+\documentclass{article}
+\usepackage{polski}
+\usepackage[utf8]{inputenc}
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+
+\title{Strategia testowania dla uczelnianego serwisu Git}
+\author{Marcin Kostrzewski}
+\date{13 Listopad, 2019r}
+
+\begin{document}
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+
+\section{Produkt}
+Dokument skupia się na testowaniu serwera \textbf{Git} na Wydziale Matematyki i Informatyki Uniwersytetu im. Adama Mickiewicza w Poznaniu.
+Sewis dostępny jest pod adresem \url{https://git.wmi.amu.edu.pl/explore/repos}.
+
+
+\section{Strategia testowania}
+Strategią testowania będzie \textbf{testowanie funkcjonalne}. 
+Wybrałem ją, ponieważ serwis nie oferuje dostępu do kodu źródłowego, aplikacja jest już opakowana i skompilowana.
+Mamy do niej dostęp z poziomu wiersza polecenia (dostęp do repozytoriów przez aplikację \textit{git})
+ oraz za pomocą interfejsu WEB. Skupimy się na testowaniu
+działania całego programu, sprawdzając, czy poszczególne scenariusze użytkowania przynoszą oczekiwane
+rezultaty.
+
+\section{Zasoby testowe}
+\subsection{Środowisko testowe}
+Wydziałowy Git oferuje dostep zarówno w sieci wydziałowej LAN, oraz spoza wydziału.
+Testować będziemy zarówno interfejs WEB z poziomu przeglądarki internetowej, oraz 
+interakcje z serwerem za pomocą aplikacji terminalowej git.
+
+\subsection{Zespół wykonawców}
+Testy będą przeprowadzane przez studentów wydziału, indywidualnie. Każdy z testerów
+ma we własnym zakresie sporządzić raport powstały na bazie testów z tego dokumentu.
+
+\subsection{Warunki początkowe}
+Każdy tester powinien mieć zainstalowaną dowolną przeglądarkę internetową, o wersjach nowszych niż z roku 2010.
+Dodatkowo, testerzy będą korzystać z aplikacji \textit{git} na dowolnej platformie (Windows, Linux, MacOS).
+\newline
+Testerzy jako studenci wydziału mają utworzone konta w serwisie i znają hasła dostępu.
+
+\newpage
+\section{Scenariusze testów}
+
+\subsection{Logowanie do serwisu z poziomu przeglądarki}
+\subsubsection*{Testy:}
+\begin{itemize}
+    \item Wejście na stronę \url{https://git.wmi.amu.edu.pl/explore/repos} przez przeglądarkę internetową
+    \item Kliknięcie w przycisk \textbf{Sign in} \textit{(Zaloguj się)} w prawym górnym rogu strony
+    \item Wypełnienie danych: nazwa użytkownika oraz hasło
+    \item Kliknięcie przycisku \textbf{Sign in} \textit{(Zaloguj się)}
+\end{itemize}
+\subsubsection*{Oczekiwany rezultat}
+Użytkownik zostaje zalogowany do serwisu. Przeglądarka przekierowuje zalogowanego użytkownika do
+podstrony odwiedzonej przed kliknięciem przycisku \textit{Sign in}. Przysik do zalogowania znika.
+
+\subsection{Tworzenie repozytorium}
+\textit{Użytkownik jest już zalogowany i znajduje się na stronie głównej serwisu.}
+\subsubsection*{Testy:}
+\begin{itemize}
+    \item Kliknięcie w przycisk \texttt{+} i wybranie \textit{New repository} \textit{(Nowe repozytorium)} z listy.
+    \item Wypełnienie danych: obowiązkowa nazwa repozytorium (bez znaków białych)
+    \item Kliknięcie przyciku \textbf{Create Repository} \textit{(Utwórz repozytorium)}
+\end{itemize}
+
+\subsubsection*{Oczekiwany rezultat}
+Repozytorium zostało utworzone w serwisie. Posiada podaną w formularzu nazwę oraz resztę informacji.
+Po wejściu w repozytoria użytkownika, stworzone nowe repozytorium jest widoczne na liście.
+
+\newpage
+
+\subsection{Dodawanie lokalnych zmian do repozytorium}
+\textit{Poniższe kroki będą bazowały na repozytorium utworzonym w poprzednim teście. Zmiany w repozytorium dokonywane będą z poziomu wiersza polecenia.
+Testy odbywają się w systemie operacyjnym użytkownika.}
+\subsubsection*{Testy:}
+\begin{itemize}
+    \item Sklonowanie repozytorium za pomocą komendy \textit{git clone URLREPOZYTORIUM}, gdzie podajemy link do stworzonego wcześniej repozytorium
+    \item Wejście do folderu ze sklonowanym repozytorium, utworzenie pustego pliku testowego (np. \textit{test.txt})
+    \item W terminalu w bieżącym folderze, użycie komendy \textit{git add *}, następnie \textit{git commit -m "inital commit"}, \textit{git push}
+    \item Po zapytaniu o nazwę użytkownika i hasło, podanie danych dostępowe do serwisu
+\end{itemize}
+
+\subsubsection*{Oczekiwany rezultat}
+Po wejściu do repozytorium z poziomu przeglądarki widzimy dodany plik w zawartości repozytorium z nazwą commita "initial commit"
+
+\subsection{Wysyłanie pliku do repozytorium przez interfejs WEB}
+\textit{Poniższe kroki testowe zakładają, że zostały wykonane polecenia z testów powyżej}
+\subsubsection*{Testy:}
+\begin{itemize}
+    \item Wejście na stronę \url{https://git.wmi.amu.edu.pl/explore/repos} przez przeglądarkę internetową
+    \item W prawym górnym rogu strony kliknięcie na avatar naszego użytkownika
+    \item Wybór \textit{Your Profile} \textit{(Twój profil)} z rozwiniętej listy
+    \item Kliknięcie na nazwę uprzednio utworzonego repozytorium
+    \item Kliknięcie w przycisk \textbf{Upload file} \textit{(Załaduj plik)}
+    \item Wybieramy dowolny plik na naszym komputerze i "przeciągamy go" na stronę w przeglądarce
+    \item Wypełniamy pola ze zmianami i klikamy \textbf{Commit Changes} \textit{(Zatwierdź zmiany)}
+\end{itemize}
+\subsubsection*{Oczekiwany rezultat}
+W repozytorium pojawił się przesłany plik z załączoną treścią commita
+
+\newpage
+\subsection{Usuwanie repozytorium}
+\textit{Poniższe kroki testowe zakładają, że zostały wykonane polecenia z testów powyżej}
+\subsubsection*{Testy:}
+\begin{itemize}
+    \item Wejście na stronę \url{https://git.wmi.amu.edu.pl/explore/repos} przez przeglądarkę internetową
+    \item W prawym górnym rogu strony kliknięcie na avatar naszego użytkownika
+    \item Wybór \textit{Your Profile} \textit{(Twój profil)} z rozwiniętej listy
+    \item Kliknięcie na nazwę uprzednio utworzonego repozytorium
+    \item Klinięcie w przycisk \textbf{Settings} \textit{(Ustawienia)}
+    \item Na samym dole na liście \textbf{Danger Zone} \textit{Strefa niebezpieczeństwa} kliknięcie w przycisk \textbf{Delete This Repository} \textit{(Usuń to repozytorium)}
+    \item Zostanie wywołane okienko z potwierdzeniem usunięcia, należy wpisać nazwę repozytorium w polu tekstowym i kliknąć \textbf{Confirm Deletion} \textit{Potwierdź usunięcie}
+\end{itemize}
+
+\subsubsection*{Oczekiwany rezultat}
+Repozytorium wcześniej stworzone zniknęło z listy repozytoriów na naszym koncie.
+\end{document}
